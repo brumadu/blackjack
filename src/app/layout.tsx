@@ -20,7 +20,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistMono.variable} antialiased`}>{children}</body>
+      <body className={`${geistMono.variable} antialiased`}>
+        <div className="container mx-auto items-center justify-items-center h-dvh font-[family-name:var(--font-geist-mono)]">
+          <header className="flex h-10%"></header>
+          {children}
+          <footer className=" flex h-5%"></footer>
+        </div>
+      </body>
     </html>
   );
 }
