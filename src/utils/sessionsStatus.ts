@@ -1,4 +1,4 @@
-export enum SessionStatus {
+export const enum SessionStatus {
   'created',
   'idle',
   'in_progress',
