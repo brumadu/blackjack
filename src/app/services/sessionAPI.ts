@@ -3,7 +3,7 @@ let api = process.env.API_HOST;
 export async function getSessionList() {
   const response = await fetch(api + "/sessions", {
     method: "GET",
-    cache: "no-store",
+    cache: "no-cache",
   });
   return response.json();
 }
@@ -25,9 +25,10 @@ export async function getSessionById(id: string) {
 }
 
 export async function patchPlayerAction(id: string, playerAction: string) {
-  const response = await fetch(api + `/sessions/${id}`, {
+  let api = process.env.API_HOST;
+  const response = await fetch(api + " ", {
     method: "PATCH",
-    cache: "no-store",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ playerAction: playerAction }),
   });
   console.log("here " + id + playerAction);
