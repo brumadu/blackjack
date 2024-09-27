@@ -1,4 +1,4 @@
-import { getSessionList } from "./services/sessionAPI";
+import { getSessionList } from "./api/sessionAPI";
 import Link from "next/link";
 import CreateServerArea from "./ui/CreateServerArea";
 

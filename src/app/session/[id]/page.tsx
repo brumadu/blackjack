@@ -4,7 +4,7 @@ import {
   getSessionById,
   getStartRound,
   patchPlayerAction,
-} from "@/app/services/sessionAPI";
+} from "@/app/api/sessionAPI";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 

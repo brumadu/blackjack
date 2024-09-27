@@ -1,11 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { createNewServer } from "../services/sessionAPI";
+import { createNewServer } from "../api/sessionAPI";
+import { POST } from "../api/route";
+import { useRouter } from "next/navigation";
 
 export default function CreateServerArea() {
+  const router = useRouter();
+
   let [deckQuantity, setDeckQuantity] = useState<number>(6);
-  let [serverName, setServerName] = useState("");
+  let [serverName, setServerName] = useState(" ");
   let [serverNameError, setServerNameError] = useState(false);
 
   function handleDeckQuantity(value: number) {
@@ -17,11 +21,12 @@ export default function CreateServerArea() {
   }
 
   async function handleCreateServer() {
-    if (!serverName || serverName == "" || serverName.length > 20) {
+    if (!serverName || serverName == " " || serverName.length > 20) {
       setServerNameError(true);
     } else {
       setServerNameError(false);
-      await createNewServer(serverName, deckQuantity);
+      await POST(serverName, deckQuantity);
+      router.refresh();
     }
   }
   return (
@@ -42,17 +47,21 @@ export default function CreateServerArea() {
             className="text-center rounded-3xl border-2 w-8 bg-black"
             onClick={() => handleDeckQuantity(-1)}
           >
-            {" "}
-            -{" "}
+            -
           </button>
           <input
             className="border-2 rounded-3xl text-center w-80%"
-            onChange={(e) => deckQuantity}
-            defaultValue={deckQuantity}
+            inputMode="numeric"
+            pattern="[0-9].+"
+            maxLength={20}
+            onKeyUp={(e) => {
+              if (Number(e.key) >= 4 && Number(e.key) <= 8) {
+                setDeckQuantity(Number(e.key));
+              }
+            }}
+            onChange={(e) => {}}
+            value={deckQuantity}
             type="text"
-            pattern="[0-9]*"
-            id="quantity"
-            name="quantity"
             min="4"
             max="8"
           ></input>
@@ -60,8 +69,7 @@ export default function CreateServerArea() {
             className="text-center rounded-3xl border-2 w-8 bg-black"
             onClick={() => handleDeckQuantity(1)}
           >
-            {" "}
-            +{" "}
+            +
           </button>
         </div>
       </div>
