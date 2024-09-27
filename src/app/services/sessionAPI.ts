@@ -9,8 +9,14 @@ export async function getSessionList() {
 }
 
 export async function createNewServer(title: string, deckQuantity: number) {
+  let api = process.env.API_HOST;
+  console.log(api);
   const response = await fetch(api + "/sessions", {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ title: title, deckQuantity: deckQuantity }),
   });
   return response.json();
 }

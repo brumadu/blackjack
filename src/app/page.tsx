@@ -1,6 +1,6 @@
 import { getSessionList } from "./services/sessionAPI";
 import Link from "next/link";
-import CreateServerButton from "./ui/createServerButton";
+import CreateServerArea from "./ui/CreateServerArea";
 
 function sessionList(list: any) {
   let session;
@@ -38,10 +38,7 @@ export default async function Home() {
         {sessionList(sessionResponse)}
       </div>
       <div className="basis-2/5 box-border border-2 h-full rounded-3xl text-center">
-        <p className="text-2xl">Choose an username</p>
-        <input className="border-2 border-rose-500 "></input>
-        <p className="text-2xl">Create a new Server</p>
-        <CreateServerButton />
+        <CreateServerArea />
       </div>
     </div>
   );
