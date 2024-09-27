@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { createNewServer } from "../api/sessionAPI";
 import { POST } from "../api/route";
 import { useRouter } from "next/navigation";
 
