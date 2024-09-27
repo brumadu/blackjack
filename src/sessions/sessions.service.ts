@@ -144,6 +144,7 @@ export class SessionsService {
           session.user.playerHand.push(this.getRandomCard(session.deck)[0]);
           let totalValueHit = this.calculateHand(session.user.playerHand);
           if (totalValueHit[0] > 21) {
+            session.status = SessionStatus['finished'];
             return 'you lost';
           }
           return totalValueHit;
@@ -152,17 +153,21 @@ export class SessionsService {
           session.status = SessionStatus['player_done'];
           let totalDealer = this.dealerTurn(sessionId);
           if (totalDealer > 21) {
+            session.status = SessionStatus['finished'];
             return 'you win ' + totalDealer + ' ' + totalValueStand;
           }
           if (totalDealer === 21) {
+            session.status = SessionStatus['finished'];
             return 'you lose :c' + totalDealer + ' ' + totalValueStand;
           }
           if (
             totalValueStand[0] > totalDealer ||
             totalValueStand[1] > totalDealer
           ) {
+            session.status = SessionStatus['finished'];
             return 'you win ' + totalDealer + ' ' + totalValueStand;
           } else {
+            session.status = SessionStatus['finished'];
             return 'you lose ' + totalDealer + ' ' + totalValueStand;
           }
 
