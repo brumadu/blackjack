@@ -34,17 +34,16 @@ export class SessionsService {
     return [session, sessionIndex];
   }
 
-  private getRandomCard(deck: [{}]) {
+  private getRandomCard(deck: [deckInterface]) {
     //Already removes the card from the array
-    let randomCard: {} = deck.splice(
-      Math.floor(Math.random() * deck.length),
-      1,
-    );
+    let randomCard = deck.splice(Math.floor(Math.random() * deck.length), 1);
     if (Object.keys(randomCard).length === 0) {
-      this.getRandomCard;
-    } else {
-      return randomCard;
+      return this.getRandomCard;
     }
+    if (!randomCard) {
+      return this.getRandomCard;
+    }
+    return randomCard;
   }
 
   clearHand(sessionId: string) {
@@ -154,16 +153,19 @@ export class SessionsService {
           let totalDealer = this.dealerTurn(sessionId);
           if (totalDealer > 21) {
             return 'you win ' + totalDealer + ' ' + totalValueStand;
-          } else {
-            if (
-              totalValueStand[0] > totalDealer ||
-              totalValueStand[1] > totalDealer
-            ) {
-              return 'you win ' + totalDealer + ' ' + totalValueStand;
-            } else {
-              return 'you lose ' + totalDealer + ' ' + totalValueStand;
-            }
           }
+          if (totalDealer === 21) {
+            return 'you lose :c' + totalDealer + ' ' + totalValueStand;
+          }
+          if (
+            totalValueStand[0] > totalDealer ||
+            totalValueStand[1] > totalDealer
+          ) {
+            return 'you win ' + totalDealer + ' ' + totalValueStand;
+          } else {
+            return 'you lose ' + totalDealer + ' ' + totalValueStand;
+          }
+
         case 'double_down':
           session.user.playerHand.push(this.getRandomCard(session.deck)[0]);
           let totalValueDD = this.calculateHand(session.user.playerHand);
