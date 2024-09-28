@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { SessionModel } from './sessions.model';
-import { SessionStatus } from 'src/utils/SessionStatus';
+import { SessionStatus } from '../utils/SessionStatus';
 import { UserModel } from 'src/user/user.model';
-import DeckList from 'src/utils/DeckList';
-import DeckInterface from 'src/utils/DeckInterface';
-import CardValue from 'src/utils/CardValue';
+import DeckList from '../utils/DeckList';
+import DeckInterface from '../utils/DeckInterface';
+import CardValue from '../utils/CardValue';
 
 @Injectable()
 export class SessionsService {
@@ -96,7 +96,7 @@ export class SessionsService {
   updateSession(
     sessionId: string,
     status: SessionStatus,
-    user: { user: UserModel; money: number; playerHand: [deckInterface] },
+    user: { user: UserModel; money: number; playerHand: [DeckInterface] },
     title: string,
   ) {
     let [session, index] = this.findSession(sessionId);

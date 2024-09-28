@@ -1,6 +1,6 @@
 import { UserModel } from 'src/user/user.model';
-import DeckInterface from 'src/utils/DeckInterface';
-import { SessionStatus } from 'src/utils/SessionStatus';
+import DeckInterface from '../utils/DeckInterface';
+import { SessionStatus } from '../utils/SessionStatus';
 
 export class SessionModel {
   constructor(

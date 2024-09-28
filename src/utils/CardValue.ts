@@ -1,4 +1,4 @@
-export function cardValue(card: string) {
+export default function CardValue(card: string) {
   switch (card) {
     case 'A':
       return 1;

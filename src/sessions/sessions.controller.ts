@@ -8,8 +8,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { SessionsService } from './sessions.service';
-import { UserService } from 'src/user/user.service';
-import { SessionStatus } from 'src/utils/SessionStatus';
+import { SessionStatus } from '../utils/SessionStatus';
 import { UserModel } from 'src/user/user.model';
 
 @Controller('/sessions')
@@ -73,7 +72,7 @@ export class SessionsController {
     let user: UserModel = { username: body.username, id: body.userId };
     this.sessionsService.updateSession(
       sessionId,
-      SessionStatus[body.sessionStatus],
+      SessionStatus['idle'],
       {
         user: user,
         money: body.currentMoney,
