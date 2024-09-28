@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { SessionsService } from './sessions.service';
 import { UserService } from 'src/user/user.service';
-import { SessionStatus } from 'src/utils/sessionsStatus';
+import { SessionStatus } from 'src/utils/SessionStatus';
 import { UserModel } from 'src/user/user.model';
 
 @Controller('/sessions')

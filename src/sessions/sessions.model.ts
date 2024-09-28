@@ -1,6 +1,6 @@
 import { UserModel } from 'src/user/user.model';
-import { deckInterface } from 'src/utils/deckInterface';
-import { SessionStatus } from 'src/utils/sessionsStatus';
+import DeckInterface from 'src/utils/DeckInterface';
+import { SessionStatus } from 'src/utils/SessionStatus';
 
 export class SessionModel {
   constructor(
@@ -10,9 +10,9 @@ export class SessionModel {
     public user: {
       user: UserModel;
       money: number;
-      playerHand: [deckInterface];
+      playerHand: [DeckInterface];
     },
-    public dealerHand: [deckInterface],
-    public deck: [deckInterface],
+    public dealerHand: [DeckInterface],
+    public deck: [DeckInterface],
   ) {}
 }

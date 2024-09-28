@@ -1,19 +1,19 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { SessionModel } from './sessions.model';
-import { SessionStatus } from 'src/utils/sessionsStatus';
+import { SessionStatus } from 'src/utils/SessionStatus';
 import { UserModel } from 'src/user/user.model';
-import { deckList } from 'src/utils/deckList';
-import { deckInterface } from 'src/utils/deckInterface';
-import { cardValue } from 'src/utils/cardValue';
+import DeckList from 'src/utils/DeckList';
+import DeckInterface from 'src/utils/DeckInterface';
+import CardValue from 'src/utils/CardValue';
 
 @Injectable()
 export class SessionsService {
   private sessions: SessionModel[] = [];
   private user: UserModel[] = [];
 
-  private calculateHand(hand: [deckInterface]) {
+  private calculateHand(hand: [DeckInterface]) {
     let numbers = [];
-    hand.forEach((e) => numbers.push(cardValue(e.values)));
+    hand.forEach((e) => numbers.push(CardValue(e.values)));
     let firstResult = 0;
     let secondResult = 0;
     numbers.forEach((num) => {
@@ -34,7 +34,7 @@ export class SessionsService {
     return [session, sessionIndex];
   }
 
-  private getRandomCard(deck: [deckInterface]) {
+  private getRandomCard(deck: [DeckInterface]) {
     //Already removes the card from the array
     let randomCard = deck.splice(Math.floor(Math.random() * deck.length), 1);
     if (Object.keys(randomCard).length === 0) {
@@ -64,7 +64,7 @@ export class SessionsService {
   }
 
   createSession(title: string, deckQuantity: number) {
-    let newDeck = deckList(deckQuantity);
+    let newDeck = DeckList(deckQuantity);
     const sessionId = Math.floor(Math.random() * 10000);
     const newSession = new SessionModel(
       String(sessionId),
