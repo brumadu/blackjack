@@ -3,7 +3,7 @@ import DeckInterface from './DeckInterface';
 let suits = ['C', 'S', 'D', 'H'];
 let values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K'];
 
-export default function DeckList(deckQuantity: number) {
+export default function DeckList(deckQuantity: number): [DeckInterface] {
   let list: [DeckInterface] = [
     {
       suits: '',

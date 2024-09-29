@@ -1,33 +1,43 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { UserModel } from './user.model';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/database/user.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
-  private user: UserModel[] = [];
+  constructor(
+    @InjectRepository(User)
+    private usersRepository: Repository<User>,
+  ) {}
 
-  createUser(username: string) {
-    const userId = Math.floor(Math.random() * 10000);
-    const newUser = new UserModel(String(userId), username);
-    this.user.push(newUser);
-    return newUser;
+  async createUser(
+    username: string,
+    email: string,
+    password: string,
+  ): Promise<User> {
+    const userData = await this.usersRepository.create({
+      username,
+      email,
+      password,
+    });
+    return userData;
   }
 
-  getUser(id: string) {
-    let user = this.user.find((e) => e.id == id);
-    if (!user) {
-      throw new NotFoundException('nenhum usuário encontrado');
-    } else {
-      return { ...user };
+  async getUser(id: string): Promise<User> {
+    const userData = await this.usersRepository.findOneBy({ id });
+    if (!userData) {
+      throw new NotFoundException('User not found');
     }
+    return userData;
   }
 
-  deleteUser(id: string) {
-    let userId = this.user.find((e) => e.id == id);
-    let userIndex = this.user.findIndex((e) => e.id == id);
-    if (!userId) {
-      throw new NotFoundException('nenhum usuário');
-    } else {
-      this.user.splice(userIndex, 1);
-    }
+  async getAllUser(): Promise<User[]> {
+    const userData = await this.usersRepository.find();
+    return userData;
+  }
+
+  async deleteUser(id: string): Promise<User> {
+    const userData = await this.usersRepository.findOneBy({ id });
+    return await this.usersRepository.remove(userData);
   }
 }

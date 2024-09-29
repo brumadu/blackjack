@@ -24,29 +24,6 @@ export class SessionsController {
     return { session: session };
   }
 
-  @Patch(':id')
-  playerChoice(
-    @Param('id') sessionId: string,
-    @Body() body: { playerAction: string },
-  ) {
-    let playerAction = this.sessionsService.playerChoice(
-      sessionId,
-      body.playerAction,
-    );
-    return playerAction;
-  }
-
-  @Get(':id/card')
-  startRound(@Param('id') sessionId: string) {
-    let card = this.sessionsService.startRound(sessionId);
-    return card;
-  }
-
-  @Patch(':id/clearHand')
-  clearHand(@Param('id') sessionId: string) {
-    this.sessionsService.clearHand(sessionId);
-  }
-
   @Get()
   getSessionList() {
     return this.sessionsService.getSessionsList();
@@ -57,35 +34,27 @@ export class SessionsController {
     return this.sessionsService.getSession(id);
   }
 
+  @Get(':id/card')
+  startRound(@Param('id') id: string) {
+    const card = this.sessionsService.startRound(id);
+    return { card: card };
+  }
+
   @Patch(':id')
-  updateSession(
-    @Param('id') sessionId: string,
-    @Body()
-    body: {
-      userId: string;
-      username: string;
-      sessionStatus: string;
-      currentMoney: number;
-      title: string;
-    },
+  playerChoice(
+    @Param('id') id: string,
+    @Body() body: { playerAction: string },
   ) {
-    let user: UserModel = { username: body.username, id: body.userId };
-    this.sessionsService.updateSession(
-      sessionId,
-      SessionStatus['idle'],
-      {
-        user: user,
-        money: body.currentMoney,
-        playerHand: [
-          {
-            suits: '',
-            values: '',
-          },
-        ],
-      },
-      body.title,
+    const playerAction = this.sessionsService.playerChoice(
+      id,
+      body.playerAction,
     );
-    return null;
+    return { playerAction: playerAction };
+  }
+
+  @Patch(':id/clearHand')
+  clearHand(@Param('id') sessionId: string) {
+    this.sessionsService.clearHand(sessionId);
   }
 
   @Delete(':id')
