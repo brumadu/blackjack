@@ -19,15 +19,12 @@ export class Sessions {
   @Column()
   status: number;
 
-  @Column()
-  users: User;
-
-  @Column()
+  @Column('text', { array: true, nullable: true })
   dealerHand: [DeckInterface];
 
-  @Column()
+  @Column('text', { array: true, nullable: true })
   playerHand: [DeckInterface];
 
-  @Column()
+  @Column('text', { array: true, nullable: true })
   cardsPlayed: [DeckInterface];
 }

@@ -9,11 +9,9 @@ import { Sessions } from './sessions.entity';
       type: 'postgres',
       host: 'localhost',
       username: 'postgres',
-      password: 'docker',
-      database: 'session',
+      password: 'postgres',
       entities: [User, Sessions],
       synchronize: true,
-      logging: true,
     }),
   ],
 })

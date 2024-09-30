@@ -13,8 +13,7 @@ export class SessionsService {
     @InjectRepository(Sessions)
     private sessionsRepository: Repository<Sessions>,
   ) {}
-  private sessionDeck: {};
-
+  private sessionDeck = new Map();
   private findSession(id: string) {
     const sessionData = this.sessionsRepository.findOneBy({ id });
     if (!sessionData) {
@@ -23,12 +22,18 @@ export class SessionsService {
     return sessionData;
   }
 
-  async createSession(title: string, deckQuantity: number): Promise<Sessions> {
+  async createSession(title: string, deckQuantity: number) {
     const newDeck = DeckList(deckQuantity);
     const status = SessionStatus['idle'];
-    const sessionData = await this.sessionsRepository.create({ title, status });
-    this.sessionDeck[sessionData.id] = newDeck;
-    return sessionData;
+    const sessionData = this.sessionsRepository.create({
+      title: title,
+      status: status,
+    });
+    const data = await this.sessionsRepository.save(sessionData);
+    if (data.id !== undefined) {
+      this.sessionDeck[data.id] = { newDeck };
+    }
+    return data;
   }
 
   async getSessionsList(): Promise<Sessions[]> {
@@ -58,17 +63,28 @@ export class SessionsService {
 
   async startRound(id: string) {
     const sessionData = await this.findSession(id);
-    let startSession: Sessions;
+    let startSession = {
+      dealerHand: [],
+      playerHand: [],
+      cardsPlayed: [],
+      status: undefined,
+    };
     for (let i = 0; i < 2; i++) {
-      startSession.dealerHand.push(this.getRandomCard(this.sessionDeck[id])[0]);
-      startSession.playerHand.push(this.getRandomCard(this.sessionDeck[id])[0]);
+      let dealerCard = this.getRandomCard(this.sessionDeck[id].newDeck)[0];
+      let playerCard = this.getRandomCard(this.sessionDeck[id].newDeck)[0];
+      startSession.dealerHand.push(dealerCard);
+      startSession.playerHand.push(playerCard);
+      startSession.cardsPlayed.push(dealerCard, playerCard);
     }
     startSession.status = SessionStatus['in_progress'];
+
     const sessionMerge = this.sessionsRepository.merge(
       sessionData,
       startSession,
     );
-    return await this.sessionsRepository.save(sessionMerge);
+
+    let data = await this.sessionsRepository.save(sessionMerge);
+    return data;
   }
 
   private dealerTurn(session: Sessions) {
