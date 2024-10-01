@@ -11,13 +11,13 @@ export default function ResetButton(props: { id: string }) {
   }
 
   return (
-    <div className="flex w-1/3 h-90% text-center my-4 mx-3 p-2 gap-8 justify-center">
-      <button
-        className="flex items-center justify-center border-2 w-1/2 rounded-3xl bg-blue-300 hover:bg-blue-400"
-        onClick={() => handleResetGame()}
-      >
+    <button
+      className=" bg-blue-400 rounded-2xl w-2/5 h-2/5 my-4 p-1 hover:bg-black"
+      onClick={() => handleResetGame()}
+    >
+      <div className="flex text-black text-center w-100% h-100% rounded-3xl bg-blue-500 items-center justify-center">
         reset game
-      </button>
-    </div>
+      </div>
+    </button>
   );
 }

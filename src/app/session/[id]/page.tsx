@@ -3,6 +3,23 @@ import StartGameButton from "@/app/ui/StartGameButton";
 import PlayerActionsArea from "@/app/ui/PlayerActionsArea";
 import ResetButton from "@/app/ui/ResetButton";
 import Image from "next/image";
+import Clubs from "@/app/assets/clubs";
+import Diamonds from "@/app/assets/diamonds";
+import Hearts from "@/app/assets/hearts";
+import Spades from "@/app/assets/spades";
+
+function suitToIcon(suit: string) {
+  switch (suit) {
+    case "H":
+      return <Hearts />;
+    case "D":
+      return <Diamonds />;
+    case "C":
+      return <Clubs />;
+    case "S":
+      return <Spades />;
+  }
+}
 
 async function playerCards(list: any, id: string) {
   if (list.status >= 1) {
@@ -10,11 +27,18 @@ async function playerCards(list: any, id: string) {
       (e: any) =>
         e.suits != "" && (
           <div
-            className="border-2 rounded-3xl w-32 text-center my-4 mx-3 p-2 hover:bg-slate-600"
+            className="border-2 bg-white rounded-xl w-32 text-center my-4 mx-3 p-2 hover:border-black text-black"
             key={Math.random()}
           >
-            <div></div>
-            <div>{e.values}</div>
+            <div className="flex h-1/3">
+              {e.values != "T" ? e.values : "10"}
+            </div>
+            <div className="flex h-1/3 w-100% justify-center">
+              {suitToIcon(e.suits)}
+            </div>
+            <div className="flex h-1/3 w-100%  justify-end items-end">
+              {e.values != "T" ? e.values : "10"}
+            </div>
           </div>
         )
     );
@@ -30,11 +54,19 @@ async function dealerCards(list: any) {
         e.value != "" &&
         e.suits != "" && (
           <div
-            className=" border-2 rounded-3xl w-32 h-32 text-center my-4 mx-3 p-2 hover:bg-slate-600"
+            className="border-2 bg-white rounded-xl w-32 h-2/3 text-center my-4 mx-3 p-2 hover:border-black text-black"
             key={Math.random()}
           >
-            <div>{e.suits}</div>
-            <div>{e.values}</div>
+            <div className="flex h-1/3">
+              {" "}
+              {e.values != "T" ? e.values : "10"}
+            </div>
+            <div className="flex h-1/3 w-100% justify-center">
+              {suitToIcon(e.suits)}
+            </div>
+            <div className="flex h-1/3 w-100%  justify-end items-end">
+              {e.values != "T" ? e.values : "10"}
+            </div>
           </div>
         )
     );
@@ -64,9 +96,9 @@ export default async function sessionId({
 }) {
   const sessionData = await getSessionById(params.id);
   return (
-    <div className="container w-full h-85% box-border border-2 rounded-3xl  bg-gradient-to-b from-green-800 to-green-700">
-      <div className="flex w-full h-1/3 justify-center rounded-3xl">
-        <div className="flex box-border h-full self-center w-1/3 border-2 rounded-3xl justify-center">
+    <div className="container w-100% h-85% box-border border-2 rounded-3xl  bg-gradient-to-b from-green-800 to-green-700">
+      <div className="flex w-100% h-1/3 justify-center rounded-3xl">
+        <div className="flex mt-4 h-100% self-center w-1/3 bg-green-800 border-2 rounded-3xl justify-center">
           {dealerCards(sessionData)}
         </div>
       </div>

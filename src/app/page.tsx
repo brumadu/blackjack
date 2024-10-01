@@ -66,7 +66,6 @@ export default async function Home() {
           </div>
         </div>
       </div>
-      <Clubs />
       <div className="flex basis-2/5 border-2 rounded-3xl text-center">
         <div className="rounded-3xl w-100% bg-gradient-to-b from-green-800 to-green-700">
           <p className="text-2xl text-center my-3 stroke-3 stroke-black text-white">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Clubs from "./assets/clubs";
 
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
