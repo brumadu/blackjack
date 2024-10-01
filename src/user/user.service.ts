@@ -15,7 +15,7 @@ export class UserService {
     email: string,
     password: string,
   ): Promise<User> {
-    const userData = await this.usersRepository.create({
+    const userData = await this.usersRepository.save({
       username,
       email,
       password,

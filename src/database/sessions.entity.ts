@@ -19,12 +19,12 @@ export class Sessions {
   @Column()
   status: number;
 
-  @Column('text', { array: true, nullable: true })
+  @Column('jsonb', { nullable: true })
   dealerHand: [DeckInterface];
 
-  @Column('text', { array: true, nullable: true })
+  @Column('jsonb', { nullable: true })
   playerHand: [DeckInterface];
 
-  @Column('text', { array: true, nullable: true })
+  @Column('jsonb', { nullable: true })
   cardsPlayed: [DeckInterface];
 }

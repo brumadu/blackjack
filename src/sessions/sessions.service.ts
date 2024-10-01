@@ -63,54 +63,53 @@ export class SessionsService {
 
   async startRound(id: string) {
     const sessionData = await this.findSession(id);
-    let startSession = {
-      dealerHand: [],
-      playerHand: [],
-      cardsPlayed: [],
-      status: undefined,
-    };
-    for (let i = 0; i < 2; i++) {
-      let dealerCard = this.getRandomCard(this.sessionDeck[id].newDeck)[0];
-      let playerCard = this.getRandomCard(this.sessionDeck[id].newDeck)[0];
-      startSession.dealerHand.push(dealerCard);
-      startSession.playerHand.push(playerCard);
-      startSession.cardsPlayed.push(dealerCard, playerCard);
+    if (sessionData.status === 0) {
+      let startSession = {
+        dealerHand: [],
+        playerHand: [],
+        cardsPlayed: [],
+        status: undefined,
+      };
+      for (let i = 0; i < 2; i++) {
+        let dealerCard = this.getRandomCard(this.sessionDeck[id].newDeck)[0];
+        let playerCard = this.getRandomCard(this.sessionDeck[id].newDeck)[0];
+        startSession.dealerHand.push(dealerCard);
+        startSession.playerHand.push(playerCard);
+        startSession.cardsPlayed.push(dealerCard, playerCard);
+      }
+      startSession.status = SessionStatus['in_progress'];
+
+      const sessionMerge = this.sessionsRepository.merge(
+        sessionData,
+        startSession,
+      );
+
+      let data = await this.sessionsRepository.save(sessionMerge);
+      return data;
     }
-    startSession.status = SessionStatus['in_progress'];
-
-    const sessionMerge = this.sessionsRepository.merge(
-      sessionData,
-      startSession,
-    );
-
-    let data = await this.sessionsRepository.save(sessionMerge);
-    return data;
+    throw new NotFoundException('Already in progress');
   }
 
   private dealerTurn(session: Sessions) {
-    let totalDealer = this.calculateHand(session);
-    let newDealerCard: Sessions;
+    let totalDealer = this.calculateHand(session.dealerHand);
     if (totalDealer[1] > 17 && totalDealer[1] < 21) {
       return totalDealer[1];
     }
     if (totalDealer[0] > 17) {
       return totalDealer[0];
     } else {
-      newDealerCard.dealerHand.push(
-        this.getRandomCard(this.sessionDeck[session.id])[0],
-      );
-      const sessionMerge = this.sessionsRepository.merge(
-        session,
-        newDealerCard,
-      );
-      this.sessionsRepository.save(sessionMerge);
-      return this.dealerTurn(sessionMerge);
+      let newCard = this.getRandomCard(this.sessionDeck[session.id].newDeck)[0];
+      session.dealerHand.push(newCard);
+      session.cardsPlayed.push(newCard);
+      this.sessionsRepository.save(session);
+      return this.dealerTurn(session);
     }
   }
 
-  private calculateHand(session: Sessions) {
+  private calculateHand(session) {
+    console.log(session);
     let numbers = [];
-    session.playerHand.forEach((e) => numbers.push(CardValue(e.values)));
+    session.forEach((e) => numbers.push(CardValue(e.values)));
     let firstResult = 0;
     let secondResult = 0;
 
@@ -128,43 +127,41 @@ export class SessionsService {
 
   async playerChoice(id: string, playerAction: string) {
     const sessionData = await this.findSession(id);
-    let choiceSession: Sessions;
 
     switch (playerAction) {
       case 'hit':
-        choiceSession.playerHand = this.getRandomCard(this.sessionDeck[id])[0];
-        choiceSession.status = SessionStatus['in_progress'];
-        const sessionMerge = this.sessionsRepository.merge(
-          sessionData,
-          choiceSession,
-        );
-        let totalValueHit = this.calculateHand(sessionMerge);
+        let newCard = this.getRandomCard(this.sessionDeck[id].newDeck)[0];
+        sessionData.playerHand.push(newCard);
+        sessionData.cardsPlayed.push(newCard);
+        sessionData.status = SessionStatus['in_progress'];
+        this.sessionsRepository.save(sessionData);
+        let totalValueHit = this.calculateHand(sessionData.playerHand);
         if (totalValueHit[0] >= 21) {
-          sessionMerge.status = SessionStatus['player_done'];
+          sessionData.status = SessionStatus['player_done'];
         }
-        return await this.sessionsRepository.save(sessionMerge);
+        return await this.sessionsRepository.save(sessionData);
       case 'stand':
         sessionData.status = SessionStatus['player_done'];
-        let totalValueStand = this.calculateHand(sessionData);
+        let totalValueStand = this.calculateHand(sessionData.playerHand);
         let totalDealer = this.dealerTurn(sessionData);
 
         if (totalDealer > 21) {
           sessionData.status = SessionStatus['finished'];
-          return 'you win ' + totalDealer + ' ' + totalValueStand;
+          return 'you win';
         }
         if (totalDealer === 21) {
           sessionData.status = SessionStatus['finished'];
-          return 'you lose :c' + totalDealer + ' ' + totalValueStand;
+          return 'you lose';
         }
         if (
           totalValueStand[0] > totalDealer ||
           totalValueStand[1] > totalDealer
         ) {
           sessionData.status = SessionStatus['finished'];
-          return 'you win ' + totalDealer + ' ' + totalValueStand;
+          return 'you win';
         } else {
           sessionData.status = SessionStatus['finished'];
-          return 'you lose ' + totalDealer + ' ' + totalValueStand;
+          return 'you lose';
         }
       case 'double_down':
         return 'function not added';
