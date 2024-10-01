@@ -182,6 +182,13 @@ export class SessionsService {
     return sessionData;
   }
 
+  async deleteAllSession() {
+    const sessionData = await this.sessionsRepository.find();
+    sessionData.forEach(
+      async (e) => await this.sessionsRepository.delete(e.id),
+    );
+  }
+
   async deleteSession(id: string) {
     const sessionData = await this.findSession(id);
     if (!sessionData) {

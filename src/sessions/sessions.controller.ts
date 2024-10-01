@@ -58,6 +58,11 @@ export class SessionsController {
     this.sessionsService.clearHand(sessionId);
   }
 
+  @Delete('/allSessions')
+  deleteAllSession() {
+    this.sessionsService.deleteAllSession();
+  }
+
   @Delete(':id')
   deleteSession(@Param('id') id: string) {
     this.sessionsService.deleteSession(id);
