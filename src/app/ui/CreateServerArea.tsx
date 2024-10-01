@@ -7,9 +7,9 @@ import { useRouter } from "next/navigation";
 export default function CreateServerArea() {
   const router = useRouter();
 
-  let [deckQuantity, setDeckQuantity] = useState<number>(6);
-  let [serverName, setServerName] = useState(" ");
-  let [serverNameError, setServerNameError] = useState(false);
+  const [deckQuantity, setDeckQuantity] = useState<number>(6);
+  const [serverName, setServerName] = useState(" ");
+  const [serverNameError, setServerNameError] = useState(false);
 
   function handleDeckQuantity(value: number) {
     if (deckQuantity + value > 8 || deckQuantity + value < 4) {
@@ -29,27 +29,27 @@ export default function CreateServerArea() {
     }
   }
   return (
-    <div>
-      <div className="my-2">
-        <p className="text-2xl">Server Name:</p>
+    <div className="flex flex-col justify-center h-85%">
+      <div className="my-2 w-full">
+        <p className="text-2xl">Session Name:</p>
         <input
-          className={`border-2 rounded-3xl px-3 ${
+          className={`border-2 rounded-2xl text-center border-slate-700 w-1/2 shadow-sm shadow-slate-700 hover:border-white ${
             serverNameError ? "border-red-500" : ""
           }`}
           onChange={(e) => setServerName(e.target.value)}
         ></input>
       </div>
-      <div className="m-4">
+      <div className="my-4 mb-8 w-full">
         <p className="text-2xl">Quantity of decks:</p>
-        <div className="flex justify-center">
+        <div className="flex justify-center w-full text-black gap-6 ">
           <button
-            className="text-center rounded-3xl border-2 w-8 bg-black"
+            className="text-center rounded-2xl border-2 border-slate-800 w-8 bg-slate-700 text-white shadow-md shadow-slate-700/70 hover:border-white"
             onClick={() => handleDeckQuantity(-1)}
           >
             -
           </button>
           <input
-            className="border-2 rounded-3xl text-center w-80%"
+            className="border-2 rounded-2xl text-center border-slate-700 w-1/2 shadow-sm shadow-slate-700 hover:border-white "
             inputMode="numeric"
             pattern="[0-9].+"
             maxLength={20}
@@ -58,26 +58,30 @@ export default function CreateServerArea() {
                 setDeckQuantity(Number(e.key));
               }
             }}
-            onChange={(e) => {}}
+            onChange={(e) => {
+              e;
+            }}
             value={deckQuantity}
             type="text"
             min="4"
             max="8"
           ></input>
           <button
-            className="text-center rounded-3xl border-2 w-8 bg-black"
+            className="text-center rounded-2xl border-2 border-slate-800 w-8 bg-slate-700 text-white shadow-md shadow-slate-700/70 hover:border-white"
             onClick={() => handleDeckQuantity(1)}
           >
             +
           </button>
         </div>
       </div>
-      <button
-        className="rounded-full h-10 w-90% bg-teal-400 text-black hover:bg-teal-50"
-        onClick={() => handleCreateServer()}
-      >
-        Create Server
-      </button>
+      <div className="rounded-2xl w-90% self-center bg-slate-800  p-1 hover:bg-white shadow-md shadow-slate-700/70 ">
+        <button
+          className="rounded-2xl w-full h-10 bg-slate-700 text-white"
+          onClick={() => handleCreateServer()}
+        >
+          Create Session
+        </button>
+      </div>
     </div>
   );
 }

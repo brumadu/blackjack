@@ -1,8 +1,7 @@
-let api = process.env.API_HOST;
+const api = process.env.API_HOST;
 
 export async function POST(title: string, deckQuantity: number) {
-  let call = api + "/sessions";
-  await fetch(call, {
+  await fetch(api + "/sessions", {
     body: JSON.stringify({ title: title, deckQuantity: deckQuantity }),
     method: "POST",
     headers: {

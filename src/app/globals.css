@@ -3,8 +3,46 @@
 @tailwind utilities;
 
 :root {
-  --background: #eeeeee;
-  --foreground: #171717;
+  --background: #111310;
+  --foreground: #ededed;
+}
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 15px;
+    height: 10px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 90vh;
+    margin-right: 2px;
+    @apply bg-slate-800;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-slate-700;
+    border-radius: 100vh;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-500;
+  }
+}
+
+@layer utilities {
+  .card-wrapper {
+    @apply relative bg-slate-800 overflow-hidden;
+  }
+
+  .card-wrapper::before {
+    background: conic-gradient(
+      rgba(0, 0, 0, 1) 0deg,
+      rgba(255, 255, 255, 1) 0deg,
+      transparent 20deg
+    );
+
+    @apply absolute h-[1800%] w-[200%] left-[-50%] top-[-850%] content-[''] animate-border-spin;
+  }
 }
 
 /* @media (prefers-color-scheme: dark) {

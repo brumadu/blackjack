@@ -1,4 +1,4 @@
-let api = process.env.API_HOST;
+const api = process.env.API_HOST;
 
 export async function getSessionList() {
   const response = await fetch(api + "/sessions", {

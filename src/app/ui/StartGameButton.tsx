@@ -7,17 +7,18 @@ export default function startGameButton(props: { sessionId: string }) {
   const router = useRouter();
 
   async function handleClick() {
-    console.log("here " + props.sessionId);
     await getStartRound(props.sessionId);
     router.refresh();
   }
 
   return (
-    <div
-      className="flex border-2 rounded-3xl w-32 text-center my-4 mx-3 p-2 bg-yellow-300 hover:bg-yellow-200 items-center justify-center"
+    <button
+      className=" bg-yellow-500 rounded-2xl w-2/5 h-2/5 my-4 p-1 hover:bg-black"
       onClick={() => handleClick()}
     >
-      <div> Start Game </div>
-    </div>
+      <div className="flex text-black text-center w-100% h-100% rounded-3xl bg-yellow-400 items-center justify-center">
+        Start Game
+      </div>
+    </button>
   );
 }

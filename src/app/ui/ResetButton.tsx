@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { patchClearHand } from "../api/route";
 
 export default function ResetButton(props: { id: string }) {
-  let router = useRouter();
+  const router = useRouter();
   async function handleResetGame() {
     await patchClearHand(props.id);
     router.refresh();

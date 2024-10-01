@@ -8,7 +8,7 @@ module.exports = {
     ];
   },
   env: {
-    API_HOST: "http://localhost:3000",
+    API_HOST: "http://localhost:3050",
   },
   logging: {
     fetches: {
