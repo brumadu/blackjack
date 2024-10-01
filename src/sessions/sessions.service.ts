@@ -107,7 +107,6 @@ export class SessionsService {
   }
 
   private calculateHand(session) {
-    console.log(session);
     let numbers = [];
     session.forEach((e) => numbers.push(CardValue(e.values)));
     let firstResult = 0;
@@ -144,6 +143,8 @@ export class SessionsService {
         sessionData.status = SessionStatus['player_done'];
         let totalValueStand = this.calculateHand(sessionData.playerHand);
         let totalDealer = this.dealerTurn(sessionData);
+        console.log('dealer ' + totalDealer + 'player ' + totalValueStand);
+        this.sessionsRepository.save(sessionData);
 
         if (totalDealer > 21) {
           sessionData.status = SessionStatus['finished'];
