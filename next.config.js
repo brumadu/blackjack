@@ -3,12 +3,12 @@ module.exports = {
     return [
       {
         source: "/api/:path*",
-        destination: "http://localhost:3000/:path*",
+        destination: `${process.env.API_LOCAL}/:path*`,
       },
     ];
   },
   env: {
-    API_HOST: "http://localhost:3050",
+    API_HOST: `${process.env.API_HOST}`,
   },
   logging: {
     fetches: {

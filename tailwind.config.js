@@ -36,6 +36,9 @@ module.exports = {
         "10%": "10%",
         "5%": "5%",
       },
+      colors: {
+        "pool-green": "#176317",
+      },
     },
   },
   plugins: [],

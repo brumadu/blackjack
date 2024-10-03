@@ -3,12 +3,12 @@
 import { useRouter } from "next/navigation";
 import { getStartRound } from "../api/sessionAPI";
 
-export default function startGameButton(props: { sessionId: string }) {
+export default function StartGameButton(props: { sessionId: string }) {
   const router = useRouter();
 
   async function handleClick() {
     await getStartRound(props.sessionId);
-    router.refresh();
+    setTimeout(() => router.refresh(), 100);
   }
 
   return (

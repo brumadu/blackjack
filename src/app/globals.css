@@ -1,10 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --background: #111310;
-  --foreground: #ededed;
+@layer utilities {
+  :root {
+    --background: #333333;
+    --foreground: #ededed;
+  }
 }
 
 @layer utilities {
@@ -36,9 +37,9 @@
 
   .card-wrapper::before {
     background: conic-gradient(
-      rgba(0, 0, 0, 1) 0deg,
-      rgba(255, 255, 255, 1) 0deg,
-      transparent 20deg
+      rgba(0, 0, 0, 0.5) 0deg,
+      rgba(255, 255, 255, 0.5) 0deg,
+      transparent 25deg
     );
 
     @apply absolute h-[1800%] w-[200%] left-[-50%] top-[-850%] content-[''] animate-border-spin;

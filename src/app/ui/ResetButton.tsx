@@ -1,13 +1,13 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { patchClearHand } from "../api/route";
+import { patchClearHand } from "../api/sessionAPI";
 
 export default function ResetButton(props: { id: string }) {
   const router = useRouter();
   async function handleResetGame() {
     await patchClearHand(props.id);
-    router.refresh();
+    setTimeout(() => router.refresh(), 100);
   }
 
   return (
