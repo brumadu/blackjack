@@ -3,10 +3,7 @@
 import { useRouter } from "next/navigation";
 import { patchPlayerAction } from "../api/sessionAPI";
 
-export default function PlayerActionArea(props: {
-  id: string;
-  gameResult: any;
-}) {
+export default function PlayerActionArea(props: { id: string }) {
   const router = useRouter();
 
   async function handlePlayerAction(id: string, playerAction: string) {

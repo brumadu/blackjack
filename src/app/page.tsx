@@ -47,32 +47,35 @@ export default async function Home() {
   const sessionResponse = await getSessionList();
 
   return (
-    <div className="flex gap-10 h-85% md-max:flex-wrap md-max:h-[300%] xxl:text-4xl sm-max:text-xs">
-      <div className="flex basis-3/5 md-max:basis-full rounded-lg shadow-lg">
-        <div className="rounded-lg w-100% bg-gradient-to-b from-green-800 to-green-900 ">
-          <div className=" w-100% h-10% flex items-center justify-center">
-            <div className=" xxl:text-7xl lg:text-3xl">Session List</div>
-          </div>
-          <div className="self-end w-100% h-90% p-2 rounded-b-3xl rounded-t-md">
-            <div className="flex border  border-black rounded-md bg-slate-500 justify-around text-center text-black mb-2">
-              <div className="w-1/3">title</div>
-              <div className="w-1/3">status</div>
-              <div className="w-1/3">Deck quantity</div>
+    <>
+      <header></header>
+      <div className="flex gap-10 h-85% md-max:flex-wrap md-max:h-[300%] xxl:text-4xl sm-max:text-xs">
+        <div className="flex basis-3/5 md-max:basis-full rounded-lg shadow-lg">
+          <div className="rounded-lg w-100% bg-gradient-to-b from-green-800 to-green-900 ">
+            <div className=" w-100% h-10% flex items-center justify-center">
+              <div className=" xxl:text-7xl lg:text-3xl">Session List</div>
             </div>
-            <div className="h-90% overflow-auto scrollbar">
-              {sessionList(sessionResponse)}
+            <div className="self-end w-100% h-90% p-2 rounded-b-3xl rounded-t-md">
+              <div className="flex border  border-black rounded-md bg-slate-500 justify-around text-center text-black mb-2">
+                <div className="w-1/3">title</div>
+                <div className="w-1/3">status</div>
+                <div className="w-1/3">Deck quantity</div>
+              </div>
+              <div className="h-90% overflow-auto scrollbar">
+                {sessionList(sessionResponse)}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="flex basis-2/5 md-max:basis-full rounded-lg text-center shadow-lg ">
-        <div className="rounded-lg w-100% bg-gradient-to-b from-green-800 to-green-900">
-          <div className=" text-center my-3 stroke-3 stroke-black text-white xxl:text-7xl lg:text-3xl ">
-            Create New Session
+        <div className="flex basis-2/5 md-max:basis-full rounded-lg text-center shadow-lg ">
+          <div className="rounded-lg w-100% bg-gradient-to-b from-green-800 to-green-900">
+            <div className=" text-center my-3 stroke-3 stroke-black text-white xxl:text-7xl lg:text-3xl ">
+              Create New Session
+            </div>
+            <CreateServerArea />
           </div>
-          <CreateServerArea />
         </div>
       </div>
-    </div>
+    </>
   );
 }
