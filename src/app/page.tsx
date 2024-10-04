@@ -20,23 +20,19 @@ function sessionList(list: any) {
   if (list.statusCode != 404) {
     session = list.map((session: any, i: number) => (
       <div
-        className="flex text-center w-100%  rounded mb-2 hover:bg-white shadow-sm shadow-black hover:shadow-slate-900/70"
+        className={`flex w-100% h-10 text-center items-center rounded mb-2 border border-transparent hover:border-white shadow-sm shadow-black hover:shadow-slate-900/70  ${
+          i % 2 == 0 ? "bg-slate-600" : "bg-slate-700"
+        }`}
         key={i}
       >
-        <div
-          className={`relative m-[1px] rounded ${
-            i % 2 == 0 ? "bg-slate-600" : "bg-slate-700"
-          }`}
+        <Link
+          className="grid grid-cols-3 w-100% h-100"
+          href={`/session/${session.id}`}
         >
-          <Link
-            className="grid grid-cols-3 gap-4 w-full"
-            href={`/session/${session.id}`}
-          >
-            <div className="col-span-1">{session.title}</div>
-            <div className="col-span-1">{statusEnum(session.status)}</div>
-            <div className="col-span-1">{session.id}</div>
-          </Link>
-        </div>
+          <div className="col-span-1">{session.title}</div>
+          <div className="col-span-1">{statusEnum(session.status)}</div>
+          <div className="col-span-1">{session.deckQuantity}</div>
+        </Link>
       </div>
     ));
   } else {
@@ -51,29 +47,29 @@ export default async function Home() {
   const sessionResponse = await getSessionList();
 
   return (
-    <div className="flex h-85% gap-10">
-      <div className="flex basis-3/5 w-100% rounded-lg shadow-lg ">
+    <div className="flex gap-10 h-85% md-max:flex-wrap md-max:h-[300%] xxl:text-4xl sm-max:text-xs">
+      <div className="flex basis-3/5 md-max:basis-full rounded-lg shadow-lg">
         <div className="rounded-lg w-100% bg-gradient-to-b from-green-800 to-green-900 ">
-          <div className="text-2xl w-100% h-10% flex items-center justify-center">
-            <p>Session List</p>
+          <div className=" w-100% h-10% flex items-center justify-center">
+            <div className=" xxl:text-7xl lg:text-3xl">Session List</div>
           </div>
-          <div className="self-end h-90% p-2 rounded-b-3xl rounded-t-md">
-            <div className="flex border w-[98%] border-black rounded-md bg-slate-500 justify-around text-center text-black mb-2">
+          <div className="self-end w-100% h-90% p-2 rounded-b-3xl rounded-t-md">
+            <div className="flex border  border-black rounded-md bg-slate-500 justify-around text-center text-black mb-2">
               <div className="w-1/3">title</div>
               <div className="w-1/3">status</div>
               <div className="w-1/3">Deck quantity</div>
             </div>
-            <div className="h-100% overflow-auto scrollbar pr-3">
+            <div className="h-90% overflow-auto scrollbar">
               {sessionList(sessionResponse)}
             </div>
           </div>
         </div>
       </div>
-      <div className="flex basis-2/5 rounded-lg text-center shadow-lg ">
+      <div className="flex basis-2/5 md-max:basis-full rounded-lg text-center shadow-lg ">
         <div className="rounded-lg w-100% bg-gradient-to-b from-green-800 to-green-900">
-          <p className="text-2xl text-center my-3 stroke-3 stroke-black text-white">
+          <div className=" text-center my-3 stroke-3 stroke-black text-white xxl:text-7xl lg:text-3xl ">
             Create New Session
-          </p>
+          </div>
           <CreateServerArea />
         </div>
       </div>

@@ -36,7 +36,7 @@ export async function postSession(title: string, deckQuantity: number) {
 }
 
 export async function patchPlayerAction(id: string, playerAction: string) {
-  await fetch(`${api} + /sessions/ + ${id}`, {
+  await fetch(`${api}/sessions/${id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ playerAction: playerAction }),
