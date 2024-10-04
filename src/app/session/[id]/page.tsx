@@ -39,18 +39,21 @@ function cardValueToNumber(card: string) {
   }
 }
 
-function calculateHand(handList: any, status?: any) {
+function calculateHand(handList: any, player: string, status?: any) {
   let numbers: number[] = [];
   handList?.forEach((e: any) => numbers.push(cardValueToNumber(e.values)));
   let firstResult = 0;
   let secondResult = 0;
 
-  if (status == 1) {
+  console.log(status, player, numbers);
+
+  if (status == 1 && player == "dealer") {
     if (numbers[0] == 1) {
       return "1 or 11";
     }
     return numbers[0];
   }
+
   numbers.forEach((num) => {
     firstResult += num;
   });
@@ -60,8 +63,9 @@ function calculateHand(handList: any, status?: any) {
       secondResult += num;
     });
   }
-  if (secondResult != 0 && status == 1) {
-    return firstResult + "or" + secondResult;
+
+  if (secondResult != 0 && secondResult <= 21 && status == 1) {
+    return firstResult + " or " + secondResult;
   }
 
   if (firstResult < secondResult && secondResult <= 21) {
@@ -164,9 +168,14 @@ export default async function sessionId({
   const status = sessionData.status;
   const dealerCardList = calculateHand(
     sessionData.dealerHand,
+    "dealer",
     sessionData.status
   );
-  const playerCardList = calculateHand(sessionData.playerHand);
+  const playerCardList = calculateHand(
+    sessionData.playerHand,
+    "player",
+    sessionData.status
+  );
 
   function gameResult() {
     if (status > 1) {
@@ -205,10 +214,9 @@ export default async function sessionId({
       <header className="flex h-10% items-center justify-start">
         <Link
           href={"/"}
-          className="flex flex-row items-center justify-around w-[16vw] h-[3vw] rounded my-2 bg-white bg-opacity-50"
+          className="flex items-center justify-center w-[3vw] h-[3vw] aspect-auto rounded  bg-slate-400 hover:bg-opacity-40 shadow-md shadow-black"
         >
           <BackIcon />
-          <div className="text-black text-[1.5vw]"> Go Back </div>
         </Link>
       </header>
       <div className="h-85% md-max:h-[250%] rounded-lg bg-gradient-to-b from-green-800 to-green-700 shadow-lg shadow-black sm:text-xl xl:text-3xl xxl:text-6xl">

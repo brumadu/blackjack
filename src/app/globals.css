@@ -10,24 +10,27 @@
 
 @layer utilities {
   .scrollbar::-webkit-scrollbar {
-    width: 15px;
-    height: 10px;
+    display: none;
   }
 
-  .scrollbar::-webkit-scrollbar-track {
+  /* .scrollbar::-webkit-scrollbar-track {
+    position: relative;
+    left: calc((100vw - 100%) / 2);
     border-radius: 90vh;
     margin-right: 2px;
     @apply bg-slate-800;
   }
 
   .scrollbar::-webkit-scrollbar-thumb {
+    position: relative;
+    left: calc((100vw - 100%) / 2);
     @apply bg-slate-700;
     border-radius: 100vh;
   }
 
   .scrollbar::-webkit-scrollbar-thumb:hover {
     @apply bg-slate-500;
-  }
+  } */
 }
 
 @layer utilities {

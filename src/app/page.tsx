@@ -63,7 +63,7 @@ export default async function Home() {
                 <div className="w-1/3">status</div>
                 <div className="w-1/3">Deck quantity</div>
               </div>
-              <div className="h-90% overflow-auto scrollbar">
+              <div className="flex flex-col h-90%  w-[100%] overflow-y-auto scrollbar">
                 {sessionList(sessionResponse)}
               </div>
             </div>
