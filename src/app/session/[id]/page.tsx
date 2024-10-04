@@ -46,7 +46,34 @@ async function playerCards(list: any) {
 }
 
 async function dealerCards(list: any) {
-  if (list.status >= 1) {
+  if (list.status == 1) {
+    const dealerFirstCard = list.dealerHand[0];
+    const dealerHand = (
+      <>
+        <div
+          className="rounded-lg max-h-[500px] min-h-[80px] aspect-[2/3] text-center my-4 mx-3 p-2 bg-white border-2 hover:border-black text-black shadow-md shadow-black"
+          key={Math.random()}
+        >
+          <div className="flex h-1/3">
+            {dealerFirstCard.values != "T" ? dealerFirstCard.values : "10"}
+          </div>
+          <div className="flex h-1/3 w-100% justify-center">
+            {suitToIcon(dealerFirstCard.suits)}
+          </div>
+          <div className="flex h-1/3 w-100%  justify-end items-end">
+            {dealerFirstCard.values != "T" ? dealerFirstCard.values : "10"}
+          </div>
+        </div>
+        <div className="rounded-lg max-h-[500px] min-h-[80px] aspect-[2/3] text-center my-4 mx-3 p-[5px] bg-white border-2 hover:border-black text-black shadow-md shadow-black">
+          <div className="border-2 rounded-sm border-red-600 h-100% p-[1px]">
+            <div className="bg-red-600 rounded-sm h-100%"></div>
+          </div>
+        </div>
+      </>
+    );
+
+    return dealerHand;
+  } else if (list.status > 1) {
     const dealerHand = await list.dealerHand?.map(
       (e: any) =>
         e.value != "" &&

@@ -15,20 +15,20 @@ export default function PlayerActionArea(props: {
   }
 
   return (
-    <div className="flex w-1/2 h-100% aspect-auto text-center gap-8">
+    <div className="flex w-1/2 h-100% text-center gap-8 sm-max:gap-[10px] xxl:text-7xl ">
       <button
-        className="border-2 rounded-lg text-center text-black border-black w-1/2 shadow-lg shadow-black hover:border-white"
+        className="border-2 rounded-lg text-center text-black border-black w-1/2 shadow-lg shadow-black hover:border-white bg-blue-600 "
         onClick={() => handlePlayerAction(props.id, "hit")}
       >
-        <div className="bg-blue-600 flex items-center justify-center w-100% h-100% rounded-lg">
+        <div className="flex items-center justify-center w-100% h-100%">
           hit
         </div>
       </button>
       <button
-        className="border-2 rounded-lg text-center text-black border-black w-1/2 shadow-lg shadow-black hover:border-white"
+        className="border-2 rounded-lg text-center text-black border-black w-1/2 shadow-lg shadow-black hover:border-white bg-red-500 "
         onClick={() => handlePlayerAction(props.id, "stand")}
       >
-        <div className="bg-red-500 flex items-center justify-center w-100% h-100% rounded-lg">
+        <div className="flex items-center justify-center w-100% h-100% ">
           stand
         </div>
       </button>
