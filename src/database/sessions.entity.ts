@@ -5,7 +5,6 @@ import {
   OneToMany,
   ManyToMany,
 } from 'typeorm';
-import { User } from './user.entity';
 import DeckInterface from 'src/utils/DeckInterface';
 
 @Entity()
@@ -15,6 +14,9 @@ export class Sessions {
 
   @Column({ nullable: false, type: 'varchar', length: 200 })
   title: string;
+
+  @Column()
+  deckQuantity: number;
 
   @Column()
   status: number;

@@ -14,6 +14,7 @@ export class SessionsService {
     private sessionsRepository: Repository<Sessions>,
   ) {}
   private sessionDeck = new Map();
+
   private findSession(id: string) {
     const sessionData = this.sessionsRepository.findOneBy({ id });
     if (!sessionData) {
@@ -23,16 +24,13 @@ export class SessionsService {
   }
 
   async createSession(title: string, deckQuantity: number) {
-    const newDeck = DeckList(deckQuantity);
     const status = SessionStatus['idle'];
     const sessionData = this.sessionsRepository.create({
       title: title,
       status: status,
+      deckQuantity: deckQuantity,
     });
     const data = await this.sessionsRepository.save(sessionData);
-    if (data.id !== undefined) {
-      this.sessionDeck[data.id] = { newDeck };
-    }
     return data;
   }
 
@@ -46,6 +44,18 @@ export class SessionsService {
 
   async getSession(id: string): Promise<Sessions> {
     const sessionData = await this.findSession(id);
+    let newDeck = DeckList(sessionData.deckQuantity);
+    if (!sessionData.cardsPlayed) {
+      this.sessionDeck[sessionData.id] = { newDeck };
+    } else {
+      sessionData.cardsPlayed.forEach((cardPlayed) => {
+        const index = newDeck.findIndex((e) => e == cardPlayed);
+        if (index > -1) {
+          newDeck.splice(index, 1);
+        }
+      });
+      this.sessionDeck[sessionData.id] = { newDeck };
+    }
     return sessionData;
   }
 
