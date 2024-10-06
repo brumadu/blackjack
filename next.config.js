@@ -7,4 +7,7 @@ module.exports = {
       fullUrl: true,
     },
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };

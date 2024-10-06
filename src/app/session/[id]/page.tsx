@@ -40,7 +40,7 @@ function cardValueToNumber(card: string) {
 }
 
 function calculateHand(handList: any, player: string, status?: any) {
-  let numbers: number[] = [];
+  const numbers: number[] = [];
   handList?.forEach((e: any) => numbers.push(cardValueToNumber(e.values)));
   let firstResult = 0;
   let secondResult = 0;

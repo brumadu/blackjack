@@ -1,11 +1,32 @@
+import { add, del, get } from "../lib/redis";
+
 const api = process.env.API_HOST;
 
 export async function getSessionList() {
-  const response = await fetch(api + "/sessions", {
-    method: "GET",
-    cache: "no-cache",
+  const cacheKey = "sessionList";
+  const cachedData = await get(cacheKey);
+  if (cachedData) {
+    return JSON.parse(cachedData);
+  } else {
+    const response = await fetch(api + "/sessions", {
+      method: "GET",
+      cache: "no-cache",
+    }).then((e) => e.json());
+    await add(cacheKey, JSON.stringify(response), 5 * 60);
+    return response;
+  }
+}
+
+export async function postSession(title: string, deckQuantity: number) {
+  const cacheKey = "sessionList";
+  await fetch(api + "/sessions", {
+    body: JSON.stringify({ title: title, deckQuantity: deckQuantity }),
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
   });
-  return response.json();
+  await del(cacheKey);
 }
 
 export async function getSessionById(id: string) {
@@ -23,16 +44,6 @@ export async function getStartRound(id: string) {
     cache: "no-store",
   });
   return response.json();
-}
-
-export async function postSession(title: string, deckQuantity: number) {
-  await fetch(api + "/sessions", {
-    body: JSON.stringify({ title: title, deckQuantity: deckQuantity }),
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
-  });
 }
 
 export async function patchPlayerAction(id: string, playerAction: string) {
