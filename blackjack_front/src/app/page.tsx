@@ -1,6 +1,7 @@
 import { getSessionList } from "./api/sessionAPI";
 import Link from "next/link";
 import CreateServerArea from "./ui/CreateServerArea";
+export const dynamic = 'force-dynamic'
 
 function statusEnum(status: number) {
   switch (status) {

@@ -7,11 +7,13 @@ import { Sessions } from './sessions.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: 'postgres',
       username: 'postgres',
       password: 'postgres',
+      port: 5432,
       entities: [User, Sessions],
       synchronize: true,
+      logging: true
     }),
   ],
 })
