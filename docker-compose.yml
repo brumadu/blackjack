@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+
+  backend:
+    build:
+      context: ./blackjack_back
+    environment:
+      - PORT=3050
+    ports:
+      - '3050:3050'
+    depends_on:
+      - postgres
+
+  frontend:
+    build:
+      context: ./blackjack_front
+    ports:
+      - '3000:3000'
