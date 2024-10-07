@@ -1,32 +1,43 @@
-import { add, del, get } from "../lib/redis";
+import { add, getAll } from "../lib/redis";
 
 const api = process.env.API_HOST;
 
 export async function getSessionList() {
-  const cacheKey = "sessionList";
-  const cachedData = await get(cacheKey);
-  if (cachedData) {
-    return JSON.parse(cachedData);
+  const cachedData = await getAll();
+  if (cachedData && cachedData.length !== 0) {
+    return cachedData;
   } else {
-    const response = await fetch(api + "/sessions", {
+    const sessions = await fetch(api + "/sessions", {
       method: "GET",
       cache: "no-cache",
     }).then((e) => e.json());
-    await add(cacheKey, JSON.stringify(response), 5 * 60);
-    return response;
+    sessions.forEach((session: any) => {
+      const redisSession = {
+        status: session.status,
+        deckQuantity: session.deckQuantity,
+        title: session.title,
+      };
+      add(session.id, redisSession);
+    });
+    return sessions;
   }
 }
 
 export async function postSession(title: string, deckQuantity: number) {
-  const cacheKey = "sessionList";
-  await fetch(api + "/sessions", {
+  const response = await fetch(api + "/sessions", {
     body: JSON.stringify({ title: title, deckQuantity: deckQuantity }),
     method: "POST",
     headers: {
       "Content-type": "application/json",
     },
-  });
-  await del(cacheKey);
+  }).then((e) => e.json());
+  const redisSession = {
+    status: response.status,
+    deckQuantity: response.deckQuantity,
+    title: response.title,
+  };
+  await add(response.id, redisSession);
+  return response;
 }
 
 export async function getSessionById(id: string) {
