@@ -1,7 +1,7 @@
 "use server";
 import { createClient } from "redis";
 
-const client = createClient();
+const client = createClient({url: 'redis://redis-cache'});
 
 client.on("error", (err) => console.log(err));
 

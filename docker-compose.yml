@@ -1,4 +1,7 @@
-version: '3.8'
+networks:
+  app-tier:
+    driver: bridge
+
 services:
   postgres:
     image: postgres:13
@@ -8,19 +11,39 @@ services:
       POSTGRES_DB: postgres
     ports:
       - "5432:5432"
+    networks:
+      - app-tier
+
+  redis:
+    image: redis:latest
+    container_name: redis-cache 
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - app-tier
 
   backend:
     build:
       context: ./blackjack_back
     environment:
-      - PORT=3050
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=postgres
     ports:
       - '3050:3050'
     depends_on:
       - postgres
+    networks:
+      - app-tier
 
   frontend:
     build:
       context: ./blackjack_front
+    depends_on:
+      - redis
     ports:
       - '3000:3000'
+    networks:
+      - app-tier
