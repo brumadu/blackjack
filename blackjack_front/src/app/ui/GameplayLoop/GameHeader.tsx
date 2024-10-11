@@ -14,7 +14,7 @@ const headerButtonVariants = {
 export default function GameHeader() {
   return (
     <div className="flex h-[10%] w-100% ">
-      <header className="flex h-[60%] w-100% justify-center bg-slate-primary ">
+      <header className="flex h-[60%] w-100% justify-center  ">
         <div className="flex w-[80%] mt-4 justify-between ">
           <motion.div variants={headerButtonVariants} whileHover="hover">
             <Link

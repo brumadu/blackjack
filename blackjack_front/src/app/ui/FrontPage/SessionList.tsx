@@ -24,17 +24,19 @@ export default function SessionList(props: { list: any }) {
       <motion.div
         whileHover={{ scale: 1.05 }}
         transition={{ type: "spring", stiffness: 200 }}
-        className={`flex w-90% h-10 justify-around text-start rounded pl-2 mb-2 items-center shadow-md shadow-black  ${
-          i % 2 == 0 ? "bg-slate-primary" : "bg-slate-variant"
+        className={`flex w-90% h-10 justify-around text-xl text-center rounded pl-2 mb-2 items-center shadow-md shadow-black  ${
+          i % 2 == 0
+            ? "bg-slate-primary hover:border-4 hover:border-dashed"
+            : "bg-slate-variant hover:border-4 hover:border-dashed"
         }`}
         key={i}
       >
         <Link
-          className="grid grid-cols-6 w-100% h-100"
+          className="grid grid-cols-3 w-100% h-100"
           href={`/session/${session.id}`}
         >
-          <div className="col-span-3">{session.title}</div>
-          <div className="col-span-2">{statusEnum(session.status)}</div>
+          <div className="col-span-1 ">{session.title}</div>
+          <div className="col-span-1">{statusEnum(session.status)}</div>
           <div className="col-span-1">{session.deckQuantity}</div>
         </Link>
       </motion.div>

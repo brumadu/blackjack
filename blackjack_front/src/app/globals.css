@@ -50,7 +50,7 @@ body {
     background: url("./assets/suits-background.png");
     background-repeat: repeat;
     background-position: 0 0;
-    background-size: auto 30%;
+    background-size: auto 35%;
     /*adjust s value for speed*/
     animation: animatedBackground 1000s linear infinite;
   }

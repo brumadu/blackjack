@@ -43,10 +43,11 @@ export default function CreateServerArea() {
   return (
     <div className="flex flex-col justify-center h-85%">
       <div className="my-2 w-full ">
-        <p className="text-2xl">Session Name:</p>
+        <p className="text-2xl">Session Name</p>
         <motion.div variants={buttonVariants} whileHover="hover">
           <motion.input
-            className={`border-2 rounded-lg text-center text-black  w-[10vw] shadow-md shadow-black ${
+            placeholder="Blackjack"
+            className={` rounded-lg text-center text-black  w-[10vw] shadow-md shadow-black focus:outline-none ${
               serverNameError && "border-red-600"
             }`}
             onChange={(e) => setServerName(e.target.value)}
@@ -54,19 +55,19 @@ export default function CreateServerArea() {
         </motion.div>
       </div>
       <div className="my-4 mb-8 w-full">
-        <p className="text-2xl">Quantity of decks:</p>
+        <p className="text-2xl">Quantity of Decks</p>
         <div className="flex justify-center w-full text-black gap-6 ">
           <motion.button
             variants={buttonVariants}
             whileHover="hover"
-            className="text-center rounded-xl bg-slate-primary w-8  text-white shadow-md shadow-black"
+            className="text-center rounded-xl bg-slate-primary w-8  text-white shadow-md shadow-black hover:border-[3px] hover:border-dashed"
             onClick={() => handleDeckQuantity(-1)}
           >
             -
           </motion.button>
           <motion.div variants={buttonVariants} whileHover="hover">
             <input
-              className="border-2 rounded-lg text-center w-[10vw] shadow-md shadow-black hover:border-white "
+              className="border-2 rounded-lg text-center w-[10vw] shadow-md shadow-black hover:border-white focus:outline-none"
               inputMode="numeric"
               pattern="[0-9].+"
               maxLength={20}
@@ -84,7 +85,7 @@ export default function CreateServerArea() {
           <motion.button
             variants={buttonVariants}
             whileHover="hover"
-            className="text-center rounded-xl bg-slate-primary w-8  text-white shadow-md shadow-black"
+            className="text-center rounded-xl bg-slate-primary w-8  text-white shadow-md shadow-black hover:border-[3px] hover:border-dashed"
             onClick={() => handleDeckQuantity(1)}
           >
             +
@@ -94,7 +95,7 @@ export default function CreateServerArea() {
       <motion.div
         variants={buttonVariants}
         whileHover="hover"
-        className="rounded-lg w-90% self-center bg-slate-800  p-[1px] shadow-md shadow-black "
+        className="rounded-lg w-90% self-center bg-slate-800  p-[1px] shadow-md shadow-black hover:border-[3px] hover:border-dashed"
       >
         <motion.button
           className="rounded-lg w-full h-10 bg-slate-primary   text-white"
