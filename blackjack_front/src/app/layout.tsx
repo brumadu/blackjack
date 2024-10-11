@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "BlackJack",
@@ -16,12 +13,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter} antialiased`}>
-        <div className="flex justify-center h-dvh font-[family-name:var(--font-geist-mono)]">
-          <div className="w-90% ">
-            {children}
-            <footer className="flex h-5%"></footer>
-          </div>
+      <body className={`antialiased`}>
+        <div className="flex justify-center h-dvh font-Inter">
+          {children}
+          <footer className="flex h-5%"></footer>
         </div>
       </body>
     </html>
