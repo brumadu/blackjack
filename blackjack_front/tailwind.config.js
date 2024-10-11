@@ -24,6 +24,10 @@ module.exports = {
       "xxl-max": { max: "2560px" },
     },
     extend: {
+      fontFamily: {
+        Inter: ["Inter", "sans-serif"],
+        Roboto: ["Roboto", "sans-serif"],
+      },
       keyframes: {
         "border-spin": {
           "100%": {
@@ -51,7 +55,10 @@ module.exports = {
         "5%": "5%",
       },
       colors: {
-        "pool-green": "#176317",
+        "slate-background": "#6F7790",
+        "slate-primary": "#27272e",
+        "slate-secondary": "#3e3e44",
+        "slate-variant": "#56565c",
       },
     },
   },
