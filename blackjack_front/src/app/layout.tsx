@@ -14,9 +14,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`antialiased`}>
-        <div className="flex justify-center h-dvh font-Inter">
-          {children}
-          <footer className="flex h-5%"></footer>
+        <div id="animatedBackground">
+          <div className="flex justify-center h-dvh font-Inter">
+            {children}
+            <footer className="flex h-5%"></footer>
+          </div>
         </div>
       </body>
     </html>

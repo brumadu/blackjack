@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import suitToIcon from "./suitToIcon";
 
 export default function playerCards(list: any, status: any) {
-  if (list.length == 2 && status == 1) {
+  if (list && list.length == 2 && status == 1) {
     return list.map((e: any, index: number) => {
       return (
         <motion.div
@@ -24,7 +24,7 @@ export default function playerCards(list: any, status: any) {
         </motion.div>
       );
     });
-  } else {
+  } else if (list) {
     return list.map((e: any, index: number) => {
       if (list.length - 1 == index) {
         return (
