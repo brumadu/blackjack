@@ -24,25 +24,25 @@ export default function PlayerActionArea(props: {
   }
 
   return (
-    <div className="flex w-1/2 h-100% text-center gap-8 sm-max:gap-[10px] xxl:text-7xl ">
+    <div className="flex items-center justify-around text-center w-100% h-[80%] gap-4">
       <motion.button
         variants={buttonVariants}
         whileHover="hover"
-        className="border-2 rounded-lg text-center text-black border-black w-1/2 shadow-lg shadow-black hover:border-white bg-blue-600 "
+        className="flex items-center justify-center text-center w-[18vw] h-100% mt-4"
         onClick={() => handlePlayerAction(props.id, "hit")}
       >
-        <div className="flex items-center justify-center w-100% h-100%">
-          hit
+        <div className="flex rounded-full shadow-lg shadow-black text-3xl text-center w-[100%] h-[100%] text-black border-4 border-dashed border-black  bg-yellow-400 items-center justify-center hover:border-white">
+          HIT
         </div>
       </motion.button>
       <motion.button
         variants={buttonVariants}
         whileHover="hover"
-        className="border-2 rounded-lg text-center text-black border-black w-1/2 shadow-lg shadow-black hover:border-white bg-red-500 "
+        className="flex items-center justify-center text-center w-[18vw] h-100% mt-4"
         onClick={() => handlePlayerAction(props.id, "stand")}
       >
-        <div className="flex items-center justify-center w-100% h-100% ">
-          stand
+        <div className="flex rounded-full shadow-lg shadow-black text-3xl text-center w-[100%] h-[100%] text-black border-4 border-dashed border-black  bg-red-500 items-center justify-center hover:border-white">
+          STAND
         </div>
       </motion.button>
     </div>

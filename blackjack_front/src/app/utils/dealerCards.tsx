@@ -31,7 +31,7 @@ export default function DealerCards(list: any, status: any) {
           transition={{ delay: 4.5, duration: 1 }}
           className="rounded-lg max-h-[500px] min-h-[80px] aspect-[2/3] text-center my-4 mx-3 p-[5px] bg-white border-2 hover:border-black text-black shadow-md shadow-black"
         >
-          <div className="border-2 rounded-sm border-red-600 h-100% p-[1px]">
+          <div className="border-2 rounded-sm border-red-600 h-100% p-[2px]">
             <div className="bg-red-600 rounded-sm h-100%"></div>
           </div>
         </motion.div>

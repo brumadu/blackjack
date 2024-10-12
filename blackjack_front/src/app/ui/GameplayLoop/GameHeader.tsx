@@ -1,5 +1,6 @@
 "use client";
 import BackIcon from "@/app/assets/backIcon";
+import Profile from "@/app/assets/profile";
 import { motion } from "framer-motion";
 import Link from "next/link";
 const headerButtonVariants = {
@@ -27,8 +28,10 @@ export default function GameHeader() {
           <motion.div
             variants={headerButtonVariants}
             whileHover="hover"
-            className="flex h-[150%] aspect-square rounded-full bg-red-50"
-          ></motion.div>
+            className="flex h-[150%] aspect-square rounded-full p-2  bg-white border-4 border-slate-variant hover:bg-opacity-40 shadow-md shadow-black"
+          >
+            <Profile />
+          </motion.div>
         </div>
       </header>
     </div>

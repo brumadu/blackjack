@@ -26,11 +26,11 @@ export default function StartGameButton(props: { sessionId: string }) {
     <motion.button
       variants={buttonVariants}
       whileHover="hover"
-      className=" border-2 rounded-lg text-center text-black border-black w-1/2 shadow-lg shadow-black hover:border-white"
+      className="flex items-end w-[18vw] h-[10vh] hover:border-white"
       onClick={() => handleClick()}
     >
-      <div className="flex text-black text-center w-100% h-100% rounded-lg bg-yellow-400 items-center justify-center">
-        Start Game
+      <div className="flex rounded-full shadow-lg shadow-black text-3xl text-center w-[100%] h-[100%] text-black border-4 border-dashed border-black  bg-yellow-500 items-center justify-center hover:border-white">
+        START GAME
       </div>
     </motion.button>
   );

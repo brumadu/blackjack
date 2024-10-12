@@ -98,7 +98,7 @@ function RenderResult(status: any, gameResult: any) {
           duration: 2,
           delay: 4,
         }}
-        className="flex items-center justify-center self-center  h-[20%] w-[40%] text-6xl mt-4 bg-red-600 rounded-full shadow-lg shadow-black"
+        className="flex items-center justify-center self-center  h-[20%] w-[40%] text-5xl mt-4 bg-red-600 rounded-full drop-shadow-2xl shadow shadow-black"
       >
         YOU BUST
       </motion.div>
@@ -118,7 +118,7 @@ function RenderResult(status: any, gameResult: any) {
           duration: 2,
           delay: 3,
         }}
-        className="flex items-center justify-center self-center h-[20%] w-[40%] text-6xl mt-4 bg-yellow-600 rounded-lg shadow-lg shadow-black"
+        className="flex items-center justify-center self-center h-[20%] w-[40%] text-5xl mt-4 bg-yellow-500 rounded-full shadow-lg shadow-black"
       >
         YOU WIN
       </motion.div>
@@ -135,7 +135,7 @@ function RenderResult(status: any, gameResult: any) {
           duration: 2,
           delay: 4,
         }}
-        className="flex items-center justify-center self-center h-[20%] w-[40%] mt-4 text-6xl bg-red-600 rounded-full shadow-lg shadow-black"
+        className="flex items-center justify-center self-center h-[20%] w-[40%] mt-4 text-5xl bg-red-600 rounded-full shadow-lg shadow-black"
       >
         YOU LOSE
       </motion.div>

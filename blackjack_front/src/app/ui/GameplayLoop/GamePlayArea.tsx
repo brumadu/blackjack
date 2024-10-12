@@ -16,7 +16,7 @@ export default function GamePlayArea(props: { session: any }) {
   );
 
   return (
-    <div className="h-85% w-[80%] md-max:h-[250%] rounded-lg bg-gradient-to-b from-green-800 to-green-700 shadow-lg shadow-black sm:text-xl xl:text-3xl xxl:text-6xl">
+    <div className="h-85% border-8 border-dashed border-slate-primary w-[80%] md-max:h-[250%] bg-gradient-to-b from-green-800 to-green-700 shadow-2xl shadow-black sm:text-xl xl:text-3xl xxl:text-6xl">
       <DealerArea
         dealerList={dealerHand}
         status={status}
