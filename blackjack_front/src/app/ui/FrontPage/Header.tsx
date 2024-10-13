@@ -82,7 +82,7 @@ export default function Header() {
             </motion.div>
             <motion.div
               variants={textButtonVariants}
-              className=" text-center  self-center border-white border-2 border-dashed opacity-5  bg-blue-500 text-white  font-bold rounded-lg mt-3 px-2 "
+              className="absolute right-[50%] mr-[-38px] text-center  self-center border-white border-2 border-dashed opacity-5  bg-blue-500 text-white  font-bold rounded-lg mt-3 px-2 "
             >
               POKER
             </motion.div>
@@ -91,7 +91,7 @@ export default function Header() {
             initial="rest"
             whileHover="hover"
             animate="rest"
-            className="relative  w-100% h-100%"
+            className="relative w-100% h-100%"
           >
             <motion.div
               variants={headerButtonVariants}
