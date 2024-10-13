@@ -40,7 +40,7 @@ export default async function Home() {
                   </div>
                 </div>
                 <div className="flex justify-center text-start items-center w-[100%] h-[75%] ">
-                  <div className="w-[90%] h-[95%] p-4 overflow-y-auto scrollbar">
+                  <div className="w-[100%] h-[95%] p-4 overflow-y-auto scrollbar">
                     <HighlightArea />
                   </div>
                 </div>
